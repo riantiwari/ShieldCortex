@@ -4,6 +4,7 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import csv
 
 
 def main(headers):
@@ -25,7 +26,20 @@ def main(headers):
         contract = contract.get_text()
         print(contract)
         print()
+    csv_file = open('contracts.csv', 'w', encoding='utf-8', newline='')
+    #initializing the writer object to insert data
+    #in the CSV file
+    writer = csv.writer(csv_file)
 
+    # writing the header of the CSV file
+    writer.writerow(['Text', 'Author', 'Tags'])
+
+    # writing each row of the CSV
+    for contract in contracts:
+        writer.writerow(contract)
+
+    # terminating the operation and releasing the resources
+    csv_file.close()  
 
 
 #contracts = []
