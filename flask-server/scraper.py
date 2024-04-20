@@ -14,6 +14,8 @@ def main(headers):
     links = driver.find_elements(By.XPATH, "//h3[@class='title']/a")
     morelinks = [link.get_attribute('href') for link in links]
     filtered_links = [link for link in morelinks if '/Releases/Release' not in link]
+    # Close the WebDriver
+    driver.quit()
     contracts = []
     for link in filtered_links:
         conArr = scrape_contracts(link)
@@ -24,8 +26,7 @@ def main(headers):
         print(contract)
         print()
 
-    # Close the WebDriver
-    driver.quit()
+
 
 #contracts = []
 #for link in links:
