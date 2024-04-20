@@ -21,16 +21,14 @@ function App() {
       <h1> practice this is jeff's edit</h1>
       <h2> practice this is jack's edit</h2>.
 
-      {/*button for the map*/}
-      <button>
-        <Link to="/maps"> MAP  </Link>
-      </button>
+      {/*button for the map */}
 
+  
       {/*provides links for the different routes*/}
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/map" element={<MapPage />} />
+          <Route path="/mappage" element={<MapPage />} />
         </Routes>
       </Router>
     </div>
