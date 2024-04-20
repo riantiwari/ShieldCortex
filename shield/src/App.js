@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import {createRoot} from 'react-dom/client';
-import  { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Routes } from './Routes'
 import { Link, useLocation} from "react-router-dom"
 
 //import {APIProvider, Map} from '@vis.gl/react-google-maps';
@@ -17,30 +17,8 @@ import HomePage from "./pages/HomePage"
 
 function App() {
 
-  return (
-    
-    <div>
-      <h1>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
-      <h1>Doglinfd</h1>
-      <h1> practice this is jeff's edit</h1>
-      <h2> practice this is jack's edit</h2>
-
-
-      {/* button for the map */}
-      <button>
-        MAPSSS JACK IS GAY
-        <Link to="/map-page"> MAP PAGE </Link> 
-      </button>
-
-  
-
-      {/*provides routing for the different links to pages*/}
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/map-page" element={<MapPage />} />
-        </Routes>
-    </div>
-
+  return (   
+    <Routes />
   )
 }
 
