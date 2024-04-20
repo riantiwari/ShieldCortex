@@ -8,7 +8,6 @@ def main():
 
     page = requests.get('https://www.defense.gov/News/Contracts/Contract/Article/3749216/', headers=headers)
     soup = BeautifulSoup(page.text, 'html.parser')
-
     scrape_page("https://www.defense.gov/News/Contracts/Contract/Article/3749216/")
 
 
@@ -23,3 +22,93 @@ def scrape_page(url):
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#fat fuck code here
+#def scrape_page(url):
+>>>>>>> 9aba627aa60af93f17cfabfb345dda2eec9638df
