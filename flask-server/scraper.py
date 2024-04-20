@@ -17,11 +17,16 @@ def main(headers):
     filtered_links = [link for link in morelinks if '/Releases/Release' not in link]
     # Close the WebDriver
     driver.quit()
+    #creates array of whre the contracts will be listed
     contracts = []
+    #goes through the links
     for link in filtered_links:
-        conArr = scrape_contracts(link)
-        for con in conArr:
+        #stores the contract list for that link inside conTempArr
+        conTempArr = scrape_contracts(link)
+        #goes through each element in conTempArr and then adds it to the larger contracts array
+        for con in conTempArr:
             contracts.append(con)
+    #deletes the unecessary tags on each line and prints to console to test
     for contract in contracts:
         contract = contract.get_text()
         print(contract)
@@ -40,27 +45,6 @@ def main(headers):
 
     # terminating the operation and releasing the resources
     csv_file.close()  
-
-
-#contracts = []
-#for link in links:
-    #conArr = scrape_contracts(link)
-    #for con in conArr:
-        #contracts.append(con)
-#csv_file = open('contracts.csv', 'w', encoding='utf-8', newline='')
-# initializing the writer object to insert data
-# in the CSV file
-# writer = csv.writer(csv_file)
-
-# # writing the header of the CSV file
-# writer.writerow(['Text', 'Author', 'Tags'])
-
-# # writing each row of the CSV
-# for quote in quotes:
-#     writer.writerow(quote.values())
-
-# # terminating the operation and releasing the resources
-# csv_file.close()
 
 """
 Function to scrape text content from paragraph tags within the body of the page highlighting each
