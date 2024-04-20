@@ -5,6 +5,96 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
 }
 
-page = requests.get('https://quotes.toscrape.com', headers=headers)
+page = requests.get('https://www.defense.gov/News/Contracts/Contract/Article/3749216/', headers=headers)
 soup = BeautifulSoup(page.text, 'html.parser')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#fat fuck code here
+def scrape_page(url):
