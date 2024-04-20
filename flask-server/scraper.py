@@ -32,7 +32,7 @@ def main(headers):
     writer = csv.writer(csv_file)
 
     # writing the header of the CSV file
-    writer.writerow(['Text', 'Author', 'Tags'])
+    writer.writerow(['Text'])
 
     # writing each row of the CSV
     for contract in contracts:
