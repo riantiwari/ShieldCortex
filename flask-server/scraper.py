@@ -23,24 +23,9 @@ def main(headers):
         contract = contract.get_text()
         print(contract)
         print()
-    # Iterate through each <a> tag and print its href attribute
-    # for link in links:
-    #     href = link.get_attribute('href')
-    #     if href:
-    #         print(href)
 
     # Close the WebDriver
     driver.quit()
-
-    # page = requests.get('https://www.defense.gov/News/Contracts/Contract/Article/3749216/', headers=headers)
-    # soup = BeautifulSoup(page.text, 'html.parser')
-    # scrape_page("https://www.defense.gov/News/Contracts/Contract/Article/3749216/")
-
-    # links = soup.find_all('a')
-    # print(links)
-    # for link in links:
-    #     print(link.get('href'))
-    
 
 #contracts = []
 #for link in links:
