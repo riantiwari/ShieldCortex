@@ -1,4 +1,4 @@
-import React, {UseState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {createRoot} from 'react-dom/client';
 import  { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -13,26 +13,58 @@ import HomePage from "./pages/HomePage"
 
 //const API_KEY = globalThis.GOOGLE_MAPS_API_KEY ?? (process.env.GOOGLE_MAPS_API_KEY as string);
 
+
+
 function App() {
+
   return (
+    
     <div>
       <h1>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
       <h1>Doglinfd</h1>
       <h1> practice this is jeff's edit</h1>
-      <h2> practice this is jack's edit</h2>.
+      <h2> practice this is jack's edit</h2>
 
-      {/*button for the map */}
+
+      {/* button for the map */}
+      <button>
+        MAPSSS JACK IS GAY
+        <Link to="/map-page"> MAP PAGE </Link> 
+      </button>
 
   
-      {/*provides links for the different routes*/}
-      <Router>
+
+      {/*provides routing for the different links to pages*/}
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/mappage" element={<MapPage />} />
+          <Route path="/map-page" element={<MapPage />} />
         </Routes>
-      </Router>
     </div>
+
   )
 }
 
 export default App
+
+
+
+{/*
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+      <div>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/experience" element={<Experience/>} />
+          </Routes>
+        </Router>
+      </div>
+  )
+}
+
+export default App
+
+*/}
