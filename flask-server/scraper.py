@@ -16,7 +16,6 @@ def main(headers):
     filtered_links = [link for link in morelinks if '/Releases/Release' not in link]
     for link in filtered_links:
         scrape_contracts(link)
-    print(filtered_links)
     # Iterate through each <a> tag and print its href attribute
     # for link in links:
     #     href = link.get_attribute('href')
