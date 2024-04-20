@@ -14,8 +14,13 @@ def main(headers):
     links = driver.find_elements(By.XPATH, "//h3[@class='title']/a")
     morelinks = [link.get_attribute('href') for link in links]
     filtered_links = [link for link in morelinks if '/Releases/Release' not in link]
+    contracts = []
     for link in filtered_links:
         scrape_contracts(link)
+        conArr = scrape_contracts(link)
+        for con in conArr:
+            contracts.append(con)
+    print(contracts)
     # Iterate through each <a> tag and print its href attribute
     # for link in links:
     #     href = link.get_attribute('href')
