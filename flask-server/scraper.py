@@ -25,7 +25,8 @@ def main(headers):
         conTempArr = scrape_contracts(link)
         #goes through each element in conTempArr and then adds it to the larger contracts array
         for con in conTempArr:
-            contracts.append(con)
+             contracts.append(con)
+        
     #deletes the unecessary tags on each line and prints to console to test
     for contract in contracts:
         contract = contract.get_text()
