@@ -2,6 +2,54 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+
+const libraries = ['places'];
+const mapContainerStyle = {
+  width: '100vw',
+  height: '100vh',
+};
+const center = {
+  lat: 7.2905715, // default latitude
+  lng: 80.6337262, // default longitude
+};
+
+const HomePage = () => {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs',
+    libraries,
+  });
+
+  if (loadError) {
+    return <div>Error loading maps</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Loading maps</div>;
+  }
+
+  return (
+    <div>
+      <div>
+        <h1>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
+        <h1>Doglinfd</h1>
+        <h1> practice this is jeff's edit</h1>
+        <h2> practice this is jack's edit</h2>
+      </div>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={10}
+        center={center}
+      >
+        <Marker position={center} />
+      </GoogleMap>
+    </div>
+  );
+};
+
+export default HomePage;
+
+{/*
 function HomePage() {
   return (
     <div>
@@ -28,3 +76,5 @@ function HomePage() {
 }
 
 export default HomePage
+
+*/}

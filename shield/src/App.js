@@ -8,9 +8,8 @@ import { Link, useLocation} from "react-router-dom"
 //import {APIProvider, Map} from '@vis.gl/react-google-maps';
 //import ControlPanel from './control-panel';
 
+//home page with all content
 import HomePage from "./pages/HomePage"
-//different web pages are being imported
-
 
 function App() {
   return (   
