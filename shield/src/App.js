@@ -12,8 +12,6 @@ import HomePage from "./pages/HomePage"
 //different web pages are being imported
 
 
-
-
 function App() {
   return (   
     <div>
