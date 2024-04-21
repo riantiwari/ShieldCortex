@@ -1,14 +1,20 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { getCoordsForAddress } from './Geolocation'
+
 
 import { Link } from 'react-router-dom'
 
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, AdvancedMarkerF} from '@react-google-maps/api';
 // hi this a check
 
-const id = 0;
 
-const latitudeInput = 40.0;
-const longitudeInput = -75.0;
+// specified coordinates
+// const getCoordsForAddress = require('../util/Geolocation')
+
+// const getCoordsForAddress = require('./Geolocation')
+
+const id = 0;
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -22,13 +28,15 @@ const center = {
 };
 
 const testInput = {
-  lat: latitudeInput,
-  lng: longitudeInput,
+  lat: 40,
+  lng: -75,
 }
 
 const icons = {
   marker: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
 }
+
+
 
 
 function HomePage(){
@@ -48,6 +56,20 @@ function HomePage(){
     });
   };
 
+  const [coordinates, setCoordinates] = useState(null);
+
+  useEffect(() => {
+    // Call getCoordsForAddress with the desired address
+    getCoordsForAddress('1600 Amphitheatre Parkway, Mountain View, CA')
+      .then(coords => {
+        // Update state with the returned coordinates
+        setCoordinates(coords);
+      })
+      .catch(error => {
+        console.error('Error fetching coordinates:', error);
+    });
+  });
+
   if (loadError) {
     return <div>Error loading maps</div>;
   }
@@ -55,7 +77,8 @@ function HomePage(){
     return <div>Loading maps</div>;
   }
 
-
+  const latitudeInput = coordinates ? coordinates.lat : null;
+  const longitudeInput = coordinates ? coordinates.lng : null;
 
   return (
     <div>
