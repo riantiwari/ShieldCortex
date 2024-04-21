@@ -8,7 +8,7 @@ def main():
 
 def load_data(filename):
     contracts = []
-    with open(filename, newline='') as file: 
+    with open(filename, 'r', encoding='utf-8') as file: 
         reader = csv.reader(file, delimiter=",")
         next(reader)  
         for row in reader:
