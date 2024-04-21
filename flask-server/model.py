@@ -4,9 +4,12 @@ import spacy
 def main():
     nlp = spacy.load("en_core_web_sm")
     contracts = load_data("contracts.csv")
-
-    contracts = [[token.text for token in nlp(','.join(contract)) if not token.is_stop] for contract in contracts]
-    print(contracts) 
+    contracts = [','.join(contract) for contract in contracts]
+    for contract in contracts:
+        doc = nlp(contract)
+        for ent in doc.ents:
+            print(ent.text, ent.label_)
+    #contracts = [[token.text for token in nlp(','.join(contract)) if not token.is_stop] for contract in contracts]
 
 
 def load_data(filename):
