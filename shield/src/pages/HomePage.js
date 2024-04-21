@@ -37,8 +37,6 @@ const icons = {
 }
 
 
-
-
 function HomePage(){
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
@@ -47,7 +45,8 @@ function HomePage(){
   });
 
   // functions to toggle the info window that displays marker information
-  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(new Array(2).fill(false));
+  // will fill this arraylist with a malleable number of boolean vars initialized to false
+  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(new Array(5).fill(false));
   const toggleInfoWindow = (index) => {
     setIsInfoWindowOpen(prevState => {
       const newState = [...prevState];
@@ -58,17 +57,19 @@ function HomePage(){
 
   const [coordinates, setCoordinates] = useState(null);
 
-  useEffect(() => {
-    // Call getCoordsForAddress with the desired address
-    getCoordsForAddress('1600 Amphitheatre Parkway, Mountain View, CA')
-      .then(coords => {
-        // Update state with the returned coordinates
-        setCoordinates(coords);
-      })
-      .catch(error => {
-        console.error('Error fetching coordinates:', error);
-    });
-  });
+
+  // eventually will be used to read our json data and find the latitude and longitude of inputted string locations
+  // useEffect(() => {
+  //   // Call getCoordsForAddress with the desired address
+  //   getCoordsForAddress('1600 Amphitheatre Parkway, Mountain View, California')
+  //     .then(coords => {
+  //       // Update state with the returned coordinates
+  //       setCoordinates(coords);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching coordinates:', error);
+  //   });
+  // });
 
   if (loadError) {
     return <div>Error loading maps</div>;
@@ -77,14 +78,12 @@ function HomePage(){
     return <div>Loading maps</div>;
   }
 
-  const latitudeInput = coordinates ? coordinates.lat : null;
-  const longitudeInput = coordinates ? coordinates.lng : null;
 
   return (
     <div>
       <div>
         <h1 className='title'>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
-        <h3 className=''> 
+        <h3 className='' id='variableParagraph'> 
           The goal of our project is to restore the faith of the American people in their DOD contracting system. 
           <br></br>
           <br></br>
@@ -101,12 +100,69 @@ function HomePage(){
         {/* this is going to be the test marker for a test set of input coordinates */}
         {/* MARKER 1 */}
         <MarkerF 
-          position={testInput}
+          position={
+            lat: ,
+            lng: ,
+          }
           icon={{
             url: icons.marker,
             scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
           }}
-          // onClick={() => alert("Latitude: " + testInput.lat + "\nLongitude: " + testInput.lng)}
+          onClick={() => toggleInfoWindow(0)}
+          title={'Owego, New York'}
+        />
+        {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
+        {isInfoWindowOpen[0] && (
+          <InfoWindowF position={testInput} onCloseClick={() => toggleInfoWindow(0)}>
+            <div>
+              <h1 className='location'>Owego, New York</h1> 
+              <h2 className='companyName'> Lockheed Martin </h2>
+              <h2 className='branch'> Airforce</h2>
+              <p className='contractInfo'> 
+                provides for overhaul of B-2 digital reciever and legacy defense message system.
+              </p>
+            </div>
+          </InfoWindowF>
+        )}
+
+
+        {/* MARKER 2 */}
+        <MarkerF 
+          position={
+            lat: ,
+            lng: ,
+          }
+          icon={{
+            url: icons.marker,
+            scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
+          }}
+          onClick={() => toggleInfoWindow(1)}
+          title={'DC test marker'}
+        />
+        {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
+        {isInfoWindowOpen[1] && (
+          <InfoWindowF position={center} onCloseClick={() => toggleInfoWindow(1)}>
+            <div>
+              <h1 className='location'> Washington D.C.</h1> 
+              <h2 className='companyName'> Northrup Rummond </h2>
+              <h2 className='branch'> Navy Seal Branch bih</h2>
+              <p className='contractInfo'> 
+                yessuhhhhh more info yessuh
+              </p>
+            </div>
+          </InfoWindowF>
+        )}
+
+        {/* MARKER 3 */}
+        <MarkerF 
+          position={
+            lat: ,
+            lng: ,
+          }
+          icon={{
+            url: icons.marker,
+            scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
+          }}
           onClick={() => toggleInfoWindow(0)}
           title={'Philly test marker'}
         />
@@ -124,26 +180,55 @@ function HomePage(){
           </InfoWindowF>
         )}
 
-
-        {/* MARKER 2 */}
+        {/* MARKER 4 */}
         <MarkerF 
-          position={center}
+          position={
+            lat: ,
+            lng: ,
+          }
           icon={{
             url: icons.marker,
             scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
           }}
-          onClick={() => toggleInfoWindow(1)}
-          title={'DC test marker'}
+          onClick={() => toggleInfoWindow(0)}
+          title={'Philly test marker'}
         />
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[1] && (
-          <InfoWindowF position={center} onCloseClick={() => toggleInfoWindow(1)}>
+        {isInfoWindowOpen[0] && (
+          <InfoWindowF position={testInput} onCloseClick={() => toggleInfoWindow(0)}>
             <div>
-              <h1 className='location'> Washington D.C.</h1> 
-              <h2 className='companyName'> Northrup Rummond </h2>
-              <h2 className='branch'> Navy Seal Branch bih</h2>
+              <h1 className='location'>Philadelphia</h1> 
+              <h2 className='companyName'> Lockheed Martin </h2>
+              <h2 className='branch'> Army Branch</h2>
               <p className='contractInfo'> 
-                yessuhhhhh more info yessuh
+                test info about this goofy ahh contract
+              </p>
+            </div>
+          </InfoWindowF>
+        )}
+
+        {/* MARKER 5 */}
+        <MarkerF 
+          position={
+            lat: ,
+            lng: ,
+          }
+          icon={{
+            url: icons.marker,
+            scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
+          }}
+          onClick={() => toggleInfoWindow(0)}
+          title={'Philly test marker'}
+        />
+        {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
+        {isInfoWindowOpen[0] && (
+          <InfoWindowF position={testInput} onCloseClick={() => toggleInfoWindow(0)}>
+            <div>
+              <h1 className='location'>Philadelphia</h1> 
+              <h2 className='companyName'> Lockheed Martin </h2>
+              <h2 className='branch'> Army Branch</h2>
+              <p className='contractInfo'> 
+                test info about this goofy ahh contract
               </p>
             </div>
           </InfoWindowF>
