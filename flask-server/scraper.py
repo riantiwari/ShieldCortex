@@ -9,7 +9,7 @@ import csv
 
 def main(headers):
     
-    driver = webdriver.Edge()
+    driver = webdriver.Chrome()
     driver.get('https://www.defense.gov/News/Contracts/')
 
     links = driver.find_elements(By.XPATH, "//h3[@class='title']/a")
