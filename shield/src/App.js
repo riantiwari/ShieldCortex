@@ -11,9 +11,11 @@ import { Link, useLocation} from "react-router-dom"
 //home page with all content
 import HomePage from "./pages/HomePage"
 
+import './pages/HomePage.css'
+
 function App() {
   return (   
-    <div>
+    <div className='page'>
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
