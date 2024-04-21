@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, AdvancedMarkerF} from '@react-google-maps/api';
 // hi this a check
 
+const id = 0;
 
 const latitudeInput = 40.0;
 const longitudeInput = -75.0;
@@ -59,10 +60,13 @@ function HomePage(){
   return (
     <div>
       <div>
-        <h1>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
-        <h1>Im a big fat gay boy</h1>
-        <h1> My names jeff and I like boys </h1>
-        <h2> Im a big dick lover yes plz papa </h2>
+        <h1 className='title'>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
+        <h3 className=''> 
+          The goal of our project is to restore the faith of the American people in their DOD contracting system. 
+
+          Below is a interactive map with markers designating where the major defense contracts from 
+          the US government are taking the most effect
+        </h3>
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
