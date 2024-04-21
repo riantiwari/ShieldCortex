@@ -63,9 +63,10 @@ function HomePage(){
         <h1 className='title'>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
         <h3 className=''> 
           The goal of our project is to restore the faith of the American people in their DOD contracting system. 
-
+          <br></br>
+          <br></br>
           Below is a interactive map with markers designating where the major defense contracts from 
-          the US government are taking the most effect
+          the US government are taking the most effect.
         </h3>
       </div>
       <GoogleMap
