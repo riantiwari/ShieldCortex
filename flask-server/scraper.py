@@ -26,7 +26,7 @@ def main(headers):
         #goes through each element in conTempArr and then adds it to the larger contracts array
         for con in conTempArr:
              contracts.append(con)
-        
+        break
     #deletes the unecessary tags on each line and prints to console to test
     for contract in contracts:
         contract = contract.get_text()

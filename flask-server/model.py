@@ -2,7 +2,7 @@ import csv
 import spacy
 
 def main():
-    nlp = spacy.load("en_core_web_sm")
+    nlp = spacy.load("en_core_web_lg")
     
     contracts = load_data("contracts.csv")
     contracts = [','.join(contract) for contract in contracts]
@@ -12,13 +12,14 @@ def main():
             continue
         locations = getLocations(doc, nlp)
         money = ""
+        if not locations:
+            continue
         for ent in doc.ents:   
             if ent.label_ == "MONEY":
                 money = ent.text
                 break
-        if not locations:
-            continue
-        print(doc.ents[0].text, locations, money)
+        synopsis = getSynopsis(doc, nlp)
+        print(doc.ents[0].text, locations, money, synopsis)
         print()
     #contracts = [[token.text for token in nlp(','.join(contract)) if not token.is_stop] for contract in contracts]
 
@@ -32,6 +33,12 @@ def load_data(filename):
             if row:  
                 contracts.append(row)
     return contracts
+
+def getSynopsis(doc, nlp):
+    first_two_sentences = list(doc.sents)[:1]
+
+    synopsis = " ".join(str(sent) for sent in first_two_sentences)
+    return synopsis
 
 def getLocations(doc, nlp):
     found_flag = False
