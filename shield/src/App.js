@@ -14,10 +14,6 @@ import HomePage from "./pages/HomePage"
 
 function App() {
   return (   
-<<<<<<< HEAD
-    
-    
-=======
     <div>
       <Router>
         <Routes>
@@ -26,8 +22,6 @@ function App() {
         </Routes>
       </Router>
     </div>
-
->>>>>>> jeffFrontEnd
   )
 }
 
