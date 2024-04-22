@@ -1,4 +1,4 @@
-/* styles.css */
+styles.css
 
 /* Main container styles */
 .homepage-container {
@@ -42,30 +42,31 @@
     margin-bottom: 20px;
   }
   
-  /* Marker info window styles */
-  .location {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .companyName {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #007bff;
-  }
-  
-  .branch {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #007bff;
-  }
-  
-  .contractInfo {
-    font-size: 16px;
-    color: #666;
-  }
+ /* Marker info window styles */
+.location {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #444; /* Darker text color for better contrast */
+}
+
+.companyName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #1e90ff; /* Darker blue for emphasis */
+}
+
+.branch {
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #1e90ff; /* Darker blue for consistency */
+}
+
+.contractInfo {
+  font-size: 16px;
+  color: #666;
+}
+
 
   /* styles.css */
 

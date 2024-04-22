@@ -18,8 +18,8 @@ const id = 0;
 
 const libraries = ['places'];
 const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh',
+  width: '99vw',
+  height: '98vh',
 };
 // D.C. coordinates
 const center = {
