@@ -7,18 +7,16 @@ import axios from 'axios'
 
 
 
-const API_KEY = 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs'
+const API_KEY = 'ENTER API KEY'
 
 export async function getCoordsForAddress(address){
     
 
-    // const response = await axios.get(
-    //     `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`
-    // );
-
     const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=1600%20Amphitheatre%20Parkway%20Mountain%20View%20CA&key=AIzaSyDvoGTbs5Qs2ZA1q9rtKPAOOOaZPczQNW0`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`
     );
+
+
 
     const data = await response.data;
 
