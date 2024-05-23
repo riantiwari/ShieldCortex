@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 
 import { getCoordsForAddress } from './Geolocation'
 
+import Papa from 'papaparse'
 
 
 import { Link } from 'react-router-dom'
 
-import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, AdvancedMarkerF} from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, MarkerF, InfoWindowF, AdvancedMarkerF } from '@react-google-maps/api';
 
 import './HomePage.css'
 
@@ -39,6 +40,28 @@ const icons = {
 
 
 function HomePage(){
+  const [csvData, setCsvData] = useState([]);
+  useEffect( () => {
+    const fetchData = async () => {
+      try{
+        // fetching the csv file from the specified directory
+        const response = await fetch('./conInfo.csv');
+        
+        const csvText = await response.text();
+        console.log(csvText)
+        // parse CSV data using the csv-parser library
+        const parsedData = Papa.parse(csvText, { header: true }).data;
+        setCsvData(parsedData);
+        console.log(parsedData[0]);
+
+      } catch (error) {
+        console.error('Error fetching and parsing CSV file:', error);
+      }
+    }
+
+    fetchData();
+  }, []); // empty dependency array to make sure it only runs once on bootup (not updated live)
+
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs',
@@ -56,10 +79,8 @@ function HomePage(){
     });
   };
 
-  const [coordinates, setCoordinates] = useState(null);
-
-
-  // eventually will be used to read our json data and find the latitude and longitude of inputted string locations
+  // const [coordinates, setCoordinates] = useState(null);
+  // // eventually will be used to read our json data and find the latitude and longitude of inputted string locations
   // useEffect(() => {
   //   // Call getCoordsForAddress with the desired address
   //   getCoordsForAddress('1600 Amphitheatre Parkway, Mountain View, California')
@@ -72,14 +93,14 @@ function HomePage(){
   //   });
   // });
 
+
+  // checks to make sure api's loaded properly
   if (loadError) {
     return <div>Error loading maps</div>;
   }
   if (!isLoaded) {
     return <div>Loading maps</div>;
   }
-
-
   return (
     <div>
       <div className='text'>
