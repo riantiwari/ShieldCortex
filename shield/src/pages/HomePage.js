@@ -41,18 +41,19 @@ const icons = {
 
 function HomePage(){
   const [csvData, setCsvData] = useState([]);
+  // parses thru each row of csv data, and initializes each element of csvData[] with info in row
+  // also gets corresponding lat and long for address
   useEffect( () => {
     const fetchData = async () => {
       try{
         // fetching the csv file from the specified directory
         const response = await fetch('./conInfo.csv');
-        
         const csvText = await response.text();
-        console.log(csvText)
+
         // parse CSV data using the csv-parser library
         const parsedData = Papa.parse(csvText, { header: true }).data;
         setCsvData(parsedData);
-        console.log(parsedData[0]);
+        console.log(parsedData[4]);
 
       } catch (error) {
         console.error('Error fetching and parsing CSV file:', error);
@@ -60,6 +61,8 @@ function HomePage(){
     }
 
     fetchData();
+    console.log(getCoordsForAddress("hehehaha"));
+    
   }, []); // empty dependency array to make sure it only runs once on bootup (not updated live)
 
   // checks if aps loaded in properly
@@ -80,7 +83,7 @@ function HomePage(){
   };
 
   // const [coordinates, setCoordinates] = useState(null);
-  // // eventually will be used to read our json data and find the latitude and longitude of inputted string locations
+  // // // eventually will be used to read our json data and find the latitude and longitude of inputted string locations
   // useEffect(() => {
   //   // Call getCoordsForAddress with the desired address
   //   getCoordsForAddress('1600 Amphitheatre Parkway, Mountain View, California')

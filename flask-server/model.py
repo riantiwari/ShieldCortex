@@ -6,7 +6,7 @@ def main():
     
     contracts = load_data("contracts.csv")
     contracts = [','.join(contract) for contract in contracts]
-    csv_file = open('conInfo.csv', 'w', encoding='utf-8', newline='')
+    csv_file = open('shield/public/conInfo.csv', 'w', encoding='utf-8', newline='')
     #initializing the writer object to insert data
     #in the CSV file
     writer = csv.writer(csv_file)

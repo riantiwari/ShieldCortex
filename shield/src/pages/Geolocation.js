@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 import HttpError from '../util/http-error'
 
-const axios = require('axios')
+// const axios = require('axios')
+import axios from 'axios'
 
 
 
@@ -15,21 +16,22 @@ export async function getCoordsForAddress(address){
     //     `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`
     // );
 
-    const response = await axios.getAdapter(
-        'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${API_KEY}'
+    const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=1600%20Amphitheatre%20Parkway%20Mountain%20View%20CA&key=AIzaSyDvoGTbs5Qs2ZA1q9rtKPAOOOaZPczQNW0`
     );
 
-    const data = response.data;
+    const data = await response.data;
 
     if (!data || data.status === 'ZERO_RESULTS') {
         const error = new HttpError('Could not find location for specified address.', 422);
         throw error;
     }
 
-    const coordinates = data.results[0].geometry.location;
+    // const coordinates = data.results[0].geometry.location;
 
-    
-    return coordinates;
+    // return coordinates;
+
+    return data;
 }
 
 
