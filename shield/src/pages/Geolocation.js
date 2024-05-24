@@ -8,6 +8,7 @@ import axios from 'axios'
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const API_KEY = 'ENTER API KEY'
 
 export async function getCoordsForAddress(address){
@@ -15,6 +16,9 @@ export async function getCoordsForAddress(address){
 
 =======
 const API_KEY = 'AIzaSyDvoGTbs5Qs2ZA1q9rtKPAOOOaZPczQNW0'
+=======
+const API_KEY = 'API_KEY_2'
+>>>>>>> crip_jeff
 
 export async function getCoordsForAddress(address){
 >>>>>>> crip_jeff

@@ -62,6 +62,12 @@ styles.css
   color: #1e90ff; /* Darker blue for consistency */
 }
 
+.money{
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #1e90ff; /* Darker blue for consistency */
+}
+
 .contractInfo {
   font-size: 16px;
   color: #666;

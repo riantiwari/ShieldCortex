@@ -16,6 +16,8 @@ import './HomePage.css'
 
 // const getCoordsForAddress = require('./Geolocation')
 
+// *******  ALL API KEYS CAN BE FOUND ON OUR SHIELD CORTEX HUB GOGLE DOC  ******* //
+
 const id = 0;
 
 const libraries = ['places'];
@@ -29,10 +31,10 @@ const center = {
   lng: -77.0369, // default longitude
 };
 
-const testInput = {
-  lat: 40,
-  lng: -75,
-}
+// const testInput = {
+//   lat: 40,
+//   lng: -75,
+// }
 
 const icons = {
   marker: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
@@ -41,17 +43,19 @@ const icons = {
 
 function HomePage(){
   const [csvData, setCsvData] = useState([]);
+  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState([]);
   // parses thru each row of csv data, and initializes each element of csvData[] with info in row
   // also gets corresponding lat and long for address
   useEffect( () => {
     const fetchData = async () => {
       try{
+        // console.log("is it array? " + Array.isArray(csvData));
         // fetching the csv file from the specified directory
         const response = await fetch('./conInfo.csv');
         const csvText = await response.text();
 
         // parse CSV data using the csv-parser library
-        const parsedData = Papa.parse(csvText, { header: true }).data;
+        const parsedResult = Papa.parse(csvText, { header: true });
 
         //            TESTING ***********
                   // console.log("parsedData is: " + parsedData)
@@ -62,20 +66,29 @@ function HomePage(){
                   // });
         // will add corresponding longitude and latitude for each element/row
         // Add corresponding longitude and latitude for each element/row
-        const updatedData = await Promise.all(
-          parsedData.map(async (item) => {
-            try {
-              const coordinates = await getCoordsForAddress(item.Location);
-              return { ...item, coordinates };
-            } catch (error) {
-              console.error('Error fetching coordinates for address:', item.location, error);
-              return { ...item, coordinates: null }; // Handle errors gracefully
-            }
-          })
-        );
+        // console.log("is parsedResult array?: " + Array.isArray(parsedResult));
+        // console.log("is parsedResult.data an array?: " + Array.isArray(parsedResult.data))
+        if(Array.isArray(parsedResult.data)){
+          const parsedData = parsedResult.data;
 
-        setCsvData(updatedData);
+          const updatedData = await Promise.all(
+            parsedData.map(async (item) => {
+              try {
+                const coordinates = await getCoordsForAddress(item.Location);
+                return { ...item, coordinates };
+              } catch (error) {
+                console.error('Error fetching coordinates for address:', item.location, error);
+                return { ...item, coordinates: null }; // Handle errors gracefully
+              }
+            })
+          );
 
+          setCsvData(updatedData);
+          setIsInfoWindowOpen(new Array(updatedData.length).fill(false));
+
+        } else{
+          console.log("Parsed data is not an array: " + parsedResult.data);
+        }
       } catch (error) {
         console.error('Error fetching and parsing CSV file:', error);
       }
@@ -87,15 +100,18 @@ function HomePage(){
 
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
+<<<<<<< HEAD
     googleMapsApiKey: 'ENTER API KEY',
+=======
+    googleMapsApiKey: 'API_KEY_1',
+>>>>>>> crip_jeff
     libraries,
   });
 
   // functions to toggle the info window that displays marker information
   // will fill this arraylist with a malleable number of boolean vars initialized to false
-  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(new Array(5).fill(false));
   const toggleInfoWindow = (index) => {
-    setIsInfoWindowOpen(prevState => {
+    setIsInfoWindowOpen((prevState) => {
       const newState = [...prevState];
       newState[index] = !newState[index];
       return newState;
@@ -138,10 +154,51 @@ function HomePage(){
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={4.5}
+        zoom={2}
         center={center}
       >
-
+      
+        {/* iterates thru csvData and maps each element (row of csv file) as corresponding marker */}
+        {csvData.map((item, index) => {
+          if(item.coordinates != null && item.coordinates.lat != null && item.coordinates.lng != null){
+            return (
+              <React.Fragment key={index}>
+                {/* marker for specific element in csvData */}
+                <MarkerF
+                  position = {{
+                    lat: item.coordinates.lat,
+                    lng: item.coordinates.lng,
+                  }}
+                  icon={{
+                    url: icons.marker,
+                    scaledSize: new window.google.maps.Size(50, 50), // Adjust the size if needed
+                  }}
+                  onClick={() => toggleInfoWindow(index)}
+                  title = {item.Location}
+                ><h1>{index}</h1></MarkerF>
+                {/* corresponding info window that pops up when corresponding marker is clicked */}
+                {isInfoWindowOpen[index] && (
+                  <InfoWindowF
+                  position = {{
+                    lat: item.coordinates.lat,
+                    lng: item.coordinates.lng,
+                  }}
+                  // onCloseClick = {toggleInfoWindow(index)}
+                >
+                  <div>
+                    <h1 className='location'>{item.Location}</h1> 
+                    <h2 className='companyName'>{item.Contractor} </h2>
+                    <h2 className='money'>{item.Money}</h2>
+                    <p className='contractInfo'>{item.Synospis}</p>
+                  </div>
+                </InfoWindowF>
+                )}
+              </React.Fragment>
+            );
+          } else {
+            return null;
+          }
+        })};
         
 
             {/*       *********** PRELIMINARY HARD CODE ************         */}
