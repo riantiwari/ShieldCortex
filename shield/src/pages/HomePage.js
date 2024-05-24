@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { getCoordsForAddress } from './Geolocation'
 
-import Papa from 'papaparse'
+import Papa, { parse } from 'papaparse'
 
 
 import { Link } from 'react-router-dom'
@@ -52,8 +52,29 @@ function HomePage(){
 
         // parse CSV data using the csv-parser library
         const parsedData = Papa.parse(csvText, { header: true }).data;
-        setCsvData(parsedData);
-        console.log(parsedData[4]);
+
+        //            TESTING ***********
+                  // console.log("parsedData is: " + parsedData)
+                  // console.log(typeof parsedData)
+                  // parsedData.map((item) => {
+                  //     console.log("each element in parsedData is: " + typeof item);
+                  //     console.log(item.Location);
+                  // });
+        // will add corresponding longitude and latitude for each element/row
+        // Add corresponding longitude and latitude for each element/row
+        const updatedData = await Promise.all(
+          parsedData.map(async (item) => {
+            try {
+              const coordinates = await getCoordsForAddress(item.Location);
+              return { ...item, coordinates };
+            } catch (error) {
+              console.error('Error fetching coordinates for address:', item.location, error);
+              return { ...item, coordinates: null }; // Handle errors gracefully
+            }
+          })
+        );
+
+        setCsvData(updatedData);
 
       } catch (error) {
         console.error('Error fetching and parsing CSV file:', error);
@@ -61,7 +82,6 @@ function HomePage(){
     }
 
     fetchData();
-    console.log(getCoordsForAddress("hehehaha"));
     
   }, []); // empty dependency array to make sure it only runs once on bootup (not updated live)
 
@@ -122,9 +142,12 @@ function HomePage(){
         center={center}
       >
 
+        
+
+            {/*       *********** PRELIMINARY HARD CODE ************         */}
         {/* this is going to be the test marker for a test set of input coordinates */}
         {/* MARKER 1 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 42.1034,
             lng: -76.2622,
@@ -135,9 +158,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(0)}
           title={'Owego, New York'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[0] && (
+        {/* {isInfoWindowOpen[0] && (
           <InfoWindowF 
           position={{
             lat: 42.1034,
@@ -155,11 +178,11 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
 
         {/* MARKER 2 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 34.0381,
             lng: -118.6923,
@@ -170,9 +193,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(1)}
           title={'DC test marker'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[1] && (
+        {/* {isInfoWindowOpen[1] && (
           <InfoWindowF 
           position={{
             lat: 34.0381,
@@ -190,10 +213,10 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
         {/* MARKER 3 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 35.0489,
             lng: -106.5506,
@@ -204,9 +227,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(2)}
           title={'Philly test marker'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[2] && (
+        {/* {isInfoWindowOpen[2] && (
           <InfoWindowF 
             position={{
               lat: 35.0489,
@@ -223,10 +246,10 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
         {/* MARKER 4 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 40.6832,
             lng: 141.3690,
@@ -237,9 +260,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(3)}
           title={'Philly test marker'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[3] && (
+        {/* {isInfoWindowOpen[3] && (
           <InfoWindowF 
           position={{
             lat: 40.6832,
@@ -256,10 +279,10 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
         {/* MARKER 5 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 30.7881,
             lng: -91.3768,
@@ -270,9 +293,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(4)}
           title={'Philly test marker'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[4] && (
+        {/* {isInfoWindowOpen[4] && (
           <InfoWindowF 
             position={{
               lat: 30.7881,
@@ -289,10 +312,10 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
         {/* MARKER 6 */}
-        <MarkerF 
+        {/* <MarkerF 
           position={{
             lat: 42.5047,
             lng: -71.1956,
@@ -303,9 +326,9 @@ function HomePage(){
           }}
           onClick={() => toggleInfoWindow(5)}
           title={'Philly test marker'}
-        />
+        /> */}
         {/* this is the corresponding infowindow that will pop up when the corresponding marker is clicked */}
-        {isInfoWindowOpen[5] && (
+        {/* {isInfoWindowOpen[5] && (
           <InfoWindowF 
             position={{
               lat: 42.5047,
@@ -322,7 +345,7 @@ function HomePage(){
               </p>
             </div>
           </InfoWindowF>
-        )}
+        )} */}
 
       </GoogleMap>
     </div>
