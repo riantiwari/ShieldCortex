@@ -31,7 +31,7 @@ const center = {
   lng: -98.556732, // default longitude
 };
 
-// const testInput = {
+// const testInput = { 
 //   lat: 40,
 //   lng: -75,
 // }
@@ -39,6 +39,28 @@ const center = {
 const icons = {
   marker: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
 }
+
+// Helper function to properly format location strings
+const parseAndJoinLocation = (locationStr) => {
+  // Remove surrounding single quotes and parse the string to an array
+  let locationArray;
+  try {
+    // Remove the single quotes and parse the array
+    locationArray = JSON.parse(locationStr.replace(/'/g, '"'));
+  } catch (error) {
+    console.error("Failed to parse location:", error);
+    return locationStr; // Return original string if parsing fails
+  }
+
+  // Check if the parsed result is indeed an array
+  if (Array.isArray(locationArray)) {
+    return locationArray.join(', '); // Join the array elements into a single string
+  } else {
+    console.error("Parsed location is not an array:", locationArray);
+    return locationStr; // Return original string if parsing fails
+  }
+};
+
 
 
 function HomePage(){
@@ -138,6 +160,7 @@ function HomePage(){
   }
   return (
     <div>
+      {console.log(csvData)}
       <div className='text'>
         <h1 className='title'>Welcome to ShieldCortex: Defense Contracting Mapper</h1>
         <h3 className='' id='variableParagraph'> 
@@ -157,6 +180,9 @@ function HomePage(){
         {/* iterates thru csvData and maps each element (row of csv file) as corresponding marker */}
         {csvData.map((item, index) => {
           if(item.coordinates != null && item.coordinates.lat != null && item.coordinates.lng != null){
+            // converts json objects into strings to display properly
+            const formattedLocation = parseAndJoinLocation(item.Location);
+            console.log(typeof item.Synopsis + " ==> " + item.Synopsis);
             return (
               <React.Fragment key={index}>
                 {/* marker for specific element in csvData */}
@@ -181,11 +207,12 @@ function HomePage(){
                   }}
                   // onCloseClick = {toggleInfoWindow(index)}
                 >
-                  <div>
-                    <h1 className='location'>{item.Location}</h1> 
+                  <div className='info-window-content'>
+                    
+                    <h1 className='location'>{formattedLocation}</h1> 
                     <h2 className='companyName'>{item.Contractor} </h2>
-                    <h2 className='money'>{item.Money}</h2>
-                    <p className='contractInfo'>{item.Synospis}</p>
+                    <p className='money'>${item.Money}</p>
+                    <p>{item.Synopsis}</p>
                   </div>
                 </InfoWindowF>
                 )}

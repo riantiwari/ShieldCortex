@@ -42,36 +42,46 @@ styles.css
     margin-bottom: 20px;
   }
   
+
  /* Marker info window styles */
+.info-window-content {
+  width: auto; 
+  height: auto; 
+  padding: 10px;
+  overflow: auto
+}
+
 .location {
   font-size: 22px;
   margin-bottom: 8px;
-  color: #444; /* Darker text color for better contrast */
+  color: #444; 
 }
 
 .companyName {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 4px;
-  color: #1e90ff; /* Darker blue for emphasis */
+  color: #1e90ff;
 }
 
 .branch {
   font-size: 18px;
   margin-bottom: 4px;
-  color: #1e90ff; /* Darker blue for consistency */
+  color: #1e90ff; 
 }
 
 .money{
+  font-family: Roboto, sans-serif;
   font-size: 18px;
+  font-weight:bold;
   margin-bottom: 4px;
-  color: #1e90ff; /* Darker blue for consistency */
+  color: #5675b3; 
 }
 
 .contractInfo {
   font-size: 16px;
-  color: #666;
-}
+  color: #0e0e0e;
+} 
 
 
   /* styles.css */
