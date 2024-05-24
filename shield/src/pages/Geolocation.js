@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 
-const API_KEY = 'API_KEY_2'
+const API_KEY = 'AIzaSyDvoGTbs5Qs2ZA1q9rtKPAOOOaZPczQNW0'
 
 export async function getCoordsForAddress(address){
 

@@ -37,9 +37,8 @@ const center = {
 // }
 
 const icons = {
-  marker: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+  marker: "https://i.imgur.com/eAb3LHp.png"
 }
-
 // Helper function to properly format location strings
 const parseAndJoinLocation = (locationStr) => {
   // Remove surrounding single quotes and parse the string to an array
@@ -122,7 +121,7 @@ function HomePage(){
 
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'API_KEY_1',
+    googleMapsApiKey: 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs',
     libraries,
   });
 
