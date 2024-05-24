@@ -100,11 +100,7 @@ function HomePage(){
 
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
-<<<<<<< HEAD
-    googleMapsApiKey: 'ENTER API KEY',
-=======
     googleMapsApiKey: 'API_KEY_1',
->>>>>>> crip_jeff
     libraries,
   });
 
