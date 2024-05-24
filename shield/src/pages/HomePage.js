@@ -25,10 +25,10 @@ const mapContainerStyle = {
   width: '99vw',
   height: '98vh',
 };
-// D.C. coordinates
+// Lebanon, Kansas (center of US)
 const center = {
-  lat: 38.9072, // default latitude
-  lng: -77.0369, // default longitude
+  lat: 39.809879, // default latitude
+  lng: -98.556732, // default longitude
 };
 
 // const testInput = {
@@ -100,7 +100,7 @@ function HomePage(){
 
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'API_KEY_1',
+    googleMapsApiKey: 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs',
     libraries,
   });
 
@@ -150,7 +150,7 @@ function HomePage(){
       </div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={2}
+        zoom={4}
         center={center}
       >
       
