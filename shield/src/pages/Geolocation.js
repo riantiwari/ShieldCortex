@@ -7,11 +7,17 @@ import axios from 'axios'
 
 
 
+<<<<<<< HEAD
 const API_KEY = 'ENTER API KEY'
 
 export async function getCoordsForAddress(address){
     
 
+=======
+const API_KEY = 'AIzaSyDvoGTbs5Qs2ZA1q9rtKPAOOOaZPczQNW0'
+
+export async function getCoordsForAddress(address){
+>>>>>>> crip_jeff
     const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`
     );
@@ -19,17 +25,21 @@ export async function getCoordsForAddress(address){
 
 
     const data = await response.data;
-
+    
     if (!data || data.status === 'ZERO_RESULTS') {
-        const error = new HttpError('Could not find location for specified address.', 422);
-        throw error;
+        if(typeof address === undefined){
+            const error = new HttpError('Address is undefined.', 422);
+            throw error;
+        } else {
+            const error = new HttpError('Could not find location for specified address. ', 422);
+            throw error;
+        }
     }
 
-    // const coordinates = data.results[0].geometry.location;
-
-    // return coordinates;
-
-    return data;
+    const coordinates = data.results[0].geometry.location;
+    // console.log(data.results[0]);
+    // console.log("Address: " + address + "\ncoords: " + JSON.stringify(coordinates));
+    return coordinates;
 }
 
 
