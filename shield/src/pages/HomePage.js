@@ -122,7 +122,7 @@ function HomePage(){
 
   // checks if aps loaded in properly
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyCE2zGGFYmasHDNeJiFXzqtCyvoDs4IjOs',
+    googleMapsApiKey: 'API_KEY_1',
     libraries,
   });
 
